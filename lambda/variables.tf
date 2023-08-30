@@ -112,11 +112,6 @@ variable "zip_package_filename" {
   type        = string
   description = "The path to a zip file to use as source code for the Lambda"
   default     = ""
-
-  validation {
-    condition     = var.tf_build == true || (var.tf_build == false && var.zip_package_filename != "")
-    error_message = "When tf_build is set to false, zip_package_filename must not be an empty string."
-  }
 }
 
 variable "buildname" {
@@ -129,9 +124,4 @@ variable "lambda_dir" {
   description = "path to lambda dir relative to main module e.g. ../cmd/profile-events-writer"
   type        = string
   default     = ""
-
-  validation {
-    condition     = var.tf_build == false || (var.tf_build == true && var.lambda_dir != "")
-    error_message = "When tf_build is set to true, lambda_dir must not be an empty string."
-  }
 }
